@@ -7,8 +7,8 @@
     <script>
     function alertfuc(){
     var a = document.forms["loginform"]["username"].value;
-    var b = document.forms["loginform"]["password"].value;   
-   
+    var b = document.forms["loginform"]["password"].value;
+
     if(a=="" || b==""){
          alert("Hey Please fill the data..");
          return false;
@@ -16,15 +16,16 @@
      else{
         return true;
         }
-    
+
     }
-    
+
     </script>
-    
-</head>    
+
+</head>
 <body>
-    <section class="mysection">
-        <div class="loginbox">   
+  <center>
+    <div class="container">
+        <div class="loginbox">
             <h1>Login</h1>
            <form name="loginform" onsubmit="return alertfuc()">
                <label>Username</label>
@@ -32,12 +33,13 @@
                <label>Password</label>
                <input type="password" name="password" placeholder="Password">
                <input type="submit" value="Login" >
-            </form>   
+            </form>
             <a href="#">Forget Password?</a><br>
             <a href="signup.html">SignUp</a>
-    
+
         </div>
-    </section>
+    </div>
+  </center>
 
 </body>
 </html>
