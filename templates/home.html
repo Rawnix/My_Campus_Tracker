@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <nav></nav>
+  <div class="card">
+    <div>SBI ATM</div>
+    <div>
+      Cash: <font color="{{ colors[2] }}">{{ result[2]['stat'] }}</font>
+      <br>
+      last updated by: {{ result[2]['clg_id'] }} on {{ result[2]['upd_time'] }}
+      <form action="/toggle/sbi_atm_cash" method="POST">
+        <button type="submit">Toggle</button>
+      </form>
+    </div>
+  </div>
+  <div class="card">
+    <div>DISPENSARY</div>
+    <div>
+      Dispensary: <font color="{{ colors[0] }}">{{ result[0]['stat'] }}</font>
+      <br>
+      last updated by: {{ result[0]['clg_id'] }} on {{ result[0]['upd_time'] }}
+      <form action="/toggle/dispensary" method="POST">
+        <button type="submit">Toggle</button>
+      </form>
+    </div>
+    <div>
+      Doctor: <font color="{{ colors[1] }}">{{ result[1]['stat'] }}</font>
+      <br>
+      last updated by: {{ result[1]['clg_id'] }} on {{ result[1]['upd_time'] }}
+      <form action="/toggle/disp_doc" method="POST">
+        <button type="submit">Toggle</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
