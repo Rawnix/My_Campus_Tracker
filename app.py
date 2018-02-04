@@ -74,14 +74,40 @@ def toggle(b):
         cur.close()
     return redirect('/')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    session['logged_in'] = True
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM users WHERE clg_id = %s", ["U17CO014"])
-    row = cur.fetchone()
-    session['clg_id'] = row['clg_id']
-    return render_template('login.html')
+    if request.method == 'GET':
+        return render_template('login.html')
+    else:
+        # store the username and password from the form
+        u = request.form['username']
+        p = request.form['password']
+
+        # open connection
+        cur = mysql.connection.cursor()
+        # select rows from table of given user
+        cur.execute("SELECT * FROM users WHERE clg_id = %s", [u])
+        # store the first(and only) row from table in "row"
+        row = cur.fetchone()
+
+        # close connection
+        mysql.connection.commit()
+        cur.close()
+
+        # check if a user is found
+        if row > 0:
+            pswd = row['hash']
+            if sha256_crypt.verify(p, pswd):
+                session['clg_id'] = row['clg_id']
+                session['logged_in'] = True
+                return redirect("/")
+            else:
+                return redirect(url_for('password_fail'))
+
+        # if no user found in db
+        else:
+            return redirect(url_for('username_fail'))
+
 
 if __name__ == "__main__":
     app.secret_key = "secret123"
