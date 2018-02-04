@@ -103,11 +103,38 @@ def login():
                 session['logged_in'] = True
                 return redirect("/")
             else:
-                return redirect(url_for('password_fail'))
+                return render_template('password_fail.html')
 
         # if no user found in db
         else:
-            return redirect(url_for('username_fail'))
+            return render_template('username_fail.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'GET':
+        return render_template('register.html')
+    else:
+        u = request.form['username']
+        # check if provided username is not present in users table
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM users WHERE clg_id = %s", [u])
+        row = cur.fetchone()
+        if row > 0:
+            mysql.connection.commit()
+            cur.close()
+            return render_template('username_exists.html')
+        else:
+            f = request.form['first_name']
+            l = request.form['last_name']
+            e = request.form['email_id']
+            p = request.form['password']
+            # generate hash
+            p = sha256_crypt.encrypt(str(p))
+            # add user in the users table db
+            cur.execute("INSERT INTO users(clg_id, first_name, last_name, email_id, hash) VALUES(%s, %s, %s, %s, %s)", [u, f, l, e, p])
+            mysql.connection.commit()
+            cur.close()
+            return render_template('registered.html')
 
 
 if __name__ == "__main__":
