@@ -137,7 +137,7 @@ def register():
             return render_template('registered.html')
 
 @app.route('/buy', methods=['GET', 'POST'])
-def buy:
+def buy():
     if request.method == 'GET':
         return render_template('buy.html')
     else:
@@ -152,11 +152,34 @@ def buy:
 
         rows = cur.fetchall()
 
+        mysql.connection.commit()
+        cur.close()
+
         if rows > 0:
             return render_template('buy_query.html', rows=rows)
         else:
             return render_template("Sorry, no results found.")
 
+@app.route('/sell', methods=['GET', 'POST'])
+def sell():
+    if request.method == 'GET':
+        return render_template('sell.html')
+    else:
+        s = request.form['subject']
+        t = request.form['title']
+        a = request.form['author']
+        h = request.form['hostel']
+        r = request.form['room_num']
+        m = request.form['mob_num']
+        p = request.form['price']
+
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO books (subject, title, author, seller_clg_id, hostel, room_num, mob_num, price) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", [s, t, a, session['clg_id'], h, r, m, p])
+
+        mysql.connection.commit()
+        cur.close()
+
+        return redirect('/my_sale')
 
 if __name__ == "__main__":
     app.secret_key = "secret123"
