@@ -136,6 +136,27 @@ def register():
             cur.close()
             return render_template('registered.html')
 
+@app.route('/buy', methods=['GET', 'POST'])
+def buy:
+    if request.method == 'GET':
+        return render_template('buy.html')
+    else:
+        s = request.form['subject']
+        t = request.form['title']
+
+        cur = mysql.connection.cursor()
+        if t != '':
+            cur.execute("SELECT * FROM books WHERE subject = %s AND title = %s;", [s, t])
+        else:
+            cur.execute("SELECT * FROM books WHERE subject = %s;", [s])
+
+        rows = cur.fetchall()
+
+        if rows > 0:
+            return render_template('buy_query.html', rows=rows)
+        else:
+            return render_template("Sorry, no results found.")
+
 
 if __name__ == "__main__":
     app.secret_key = "secret123"
