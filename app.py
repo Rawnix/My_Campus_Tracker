@@ -181,6 +181,22 @@ def sell():
 
         return redirect('/my_sale')
 
+@app.route('/my_sale')
+def my_sale():
+    # redirect to login page if not already logged in
+    if session['clg_id'] == '':
+        return redirect("/login")
+    else:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM books WHERE seller_clg_id = %s", [session['clg_id']])
+        rows = cur.fetchall()
+        mysql.connection.commit()
+        cur.close()
+        if rows > 0:
+            return render_template('my_sale.html', rows=rows)
+        else:
+            return render_template("You have not put any book up for sale.")
+
 if __name__ == "__main__":
     app.secret_key = "secret123"
     app.run(debug=True)
