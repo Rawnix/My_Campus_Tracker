@@ -1,0 +1,184 @@
+<html>
+<head>
+<title>Sell</title>
+    <link rel="stylesheet" type="text/css" href="home.css">
+
+<style>
+
+html, body{
+/*     background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
+
+    background-color:steelblue;
+    margin:0px;
+}
+.mainsec::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.mainsec{
+    width:100%;
+    height:100%;
+
+}
+.header{
+    color:darkblue;
+    height:auto;
+}
+
+.header ul{
+    border:5px solid white;
+    list-style-type:none;
+    color:white;
+    margin: 0;
+    border-radius:3px;
+    overflow:hidden;
+    background-color: cadetblue;
+}
+.header li{
+    float:left;
+}
+.header li a{
+    text-decoration: none;
+    color:white;
+    margin:0;
+    padding: 5px 5px 5px 5px;
+    display:table;
+    text-align:center;
+    border-right:2px solid white;
+    font-size:5.5vw;
+}
+.header li a:hover, a:active{
+    background-color: lightskyblue;
+    border-right: 2px solid white;
+}
+
+.homelink{
+    background:blue;
+}
+
+.card{
+    background-color:white;
+    margin:5px;
+    padding:1%;
+    height:auto;
+    border-radius:5px;
+    opacity:0.9;
+    font-size:3.5vw;
+}
+
+.card .button{
+    font-size:3vw;
+    background:white;
+    color:blue;
+    border-radius:8px;
+    padding:3px 10px;
+    margin:5px;
+}
+.button:hover, .button:active{
+    color:white;
+    background:lightskyblue;
+}
+@media only screen and (min-width:500px){
+    .card, .card .button{
+        font-size:15px;
+    }
+}
+@media only screen and (min-width:500px){
+    .header li a{
+        font-size:25px;
+        padding:14px 16px;
+    }
+}
+
+.sellbox{
+    border-radius:5px;
+    max-width:400px;
+    margin:50px 10px;
+    padding:10px;
+    background-color:white;
+    opacity:0.9;
+    color:cadetblue;
+
+}
+@media only screen and (min-width:500px){
+    .sellbox{
+        font-size:20px;
+        margin:50px auto;
+    }
+}
+.sellbox select{
+    width:100%;
+    margin-bottom:10px;
+}
+.sellbox input{
+    width:100%;
+    margin-bottom:10px;
+}
+.btn{
+    width:100%;
+    background-color: rgb(104, 145, 162);
+    padding: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    height: 36px;
+    border-radius: 3px;
+    border: none;
+    color:white;
+}
+.btn:hover, .btn:focus, .btn:active{
+    color:white;
+    background-color: rgb(12, 97, 33);
+}
+
+</style>
+
+</head>
+<body>
+    <div class="container">
+    <nav class="header">
+        <ul>
+            <li><a class="homelink" href="home.html">Home</a></li>
+            <li><a href="buy.html">Buy</a></li>
+            <li><a href="sell.html">Sell</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="sellbox">
+    <form action="/sell" method="POST" name="sell">
+    <label>Subject</label>
+    <select name="subject">
+        <option value="physics">Physics</option>
+        <option value="maths">Maths</option>
+        <option value="fcp">Fundamentals of Computer Pograming</option>
+        <option value="electronics">Electronics</option>
+    </select><br>
+    <label>Book</label>
+    <input type="text" name="title" id="title" placeholder="book title"/>
+    <br>
+    <label>Author</label>
+    <input type="text" name="author" id="author" placeholder="author of book"/>
+    <br>
+    <label>Hostel</label>
+    <select name="hostel" id="">
+      <option value="gajjar">gajjar</option>
+      <option value="bhabha">bhabha</option>
+      <option value="swami">swami</option>
+      <option value="mtb">mtb</option>
+
+    </select>
+    <br>
+        <label>Room number</label><br>
+        <input type="text" class="" name="room_num" placeholder="Your Room No"><br>
+        <label>Contact</label><br>
+        <input type="text" class="" name="mob_num" placeholder="Your Contact Number"><br>
+        <label>price</label>
+        <input type="number" name="price" id="" placeholder="price" value="0"/>
+        <br>
+        <button type="submit" class="btn">Submit</button>
+    </form>
+        </div>
+    </div>
+</body>
+</html>

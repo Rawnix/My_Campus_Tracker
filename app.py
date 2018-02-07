@@ -50,9 +50,10 @@ def index():
     # else:
     return render_template('home.html', result=result, colors=colors)
 
+# common route for toggling any status
 @app.route('/toggle/<string:b>', methods=['GET', 'POST'])
 def toggle(b):
-    if request.method == 'POST':
+    if request.method == 'POST' and session['logged_in']:
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM status WHERE building = %s", [b])
         row = cur.fetchone()
@@ -73,7 +74,11 @@ def toggle(b):
 
         mysql.connection.commit()
         cur.close()
-    return redirect('/')
+        return redirect('/')
+    elif request.method == 'GET':
+        return redirect('/')
+    else:
+        return redirect('/login')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -128,13 +133,18 @@ def register():
             l = request.form['last_name']
             e = request.form['email_id']
             p = request.form['password']
-            # generate hash
-            p = sha256_crypt.encrypt(str(p))
-            # add user in the users table db
-            cur.execute("INSERT INTO users(clg_id, first_name, last_name, email_id, hash) VALUES(%s, %s, %s, %s, %s)", [u, f, l, e, p])
-            mysql.connection.commit()
-            cur.close()
-            return render_template('registered.html')
+            r = request.form['re_password']
+
+            if p!=r:
+                return ("Passwords don't match!")
+            else:
+                # generate hash
+                p = sha256_crypt.encrypt(str(p))
+                # add user in the users table db
+                cur.execute("INSERT INTO users(clg_id, first_name, last_name, email_id, hash) VALUES(%s, %s, %s, %s, %s)", [u, f, l, e, p])
+                mysql.connection.commit()
+                cur.close()
+                return render_template('registered.html')
 
 @app.route('/buy', methods=['GET', 'POST'])
 def buy():
@@ -196,6 +206,14 @@ def my_sale():
             return render_template('my_sale.html', rows=rows)
         else:
             return render_template("You have not put any book up for sale.")
+
+@app.route('/logout')
+def logout():
+    # session['logged_in'] = False
+    # session['clg_id'] = ''
+    session.clear()
+    return redirect("/")
+
 
 if __name__ == "__main__":
     app.secret_key = "secret123"
