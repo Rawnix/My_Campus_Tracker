@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Your Sale</h1>
+  <table class="table table-striped">
+    <tbody>
+      <thead class="thead-dark">
+        <td>Subject</td>
+        <td>Title</td>
+        <td>Author</td>
+        <td>Price</td>
+        <td>Upload date</td>
+      </thead>
+      {% for row in rows %}
+      <tr>
+        <td>{{ row['subject'] }}</td>
+        <td>{{ row['title'] }}</td>
+        <td>{{ row['author'] }}</td>
+        <td>{{ row['price'] }}</td>
+        <td>{{ row['upload_date'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
