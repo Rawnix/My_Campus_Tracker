@@ -1,7 +1,10 @@
 {% extends "layout.html" %}
 
+{% block title %}MyCampusTracker | Home{% endblock %}
+
 {% block body %}
 <div class="container" style="background: #DCEDC8; padding-top: 15px; padding-bottom: 15px; max-width: 500px;">
+  Welcome {{ session.clg_id }}!
 <div class="card" style="padding:15px;">
     <h2>SBI ATM</h2>
     <div>
