@@ -1,139 +1,20 @@
-<html>
-<head>
-    <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="loginmain.css">
+{% extends "layout.html" %}
 
-<style>
+{% block title %}Login{% endblock %}
 
-body, html {
-   margin: 0;
-   padding-top: 25;
-   background-color:darkgreen;
-   background-repeat: no-repeat;
-   background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
-
-}
-.container{
-    height:100%;
-    width:100%;
-    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
-    top:0;
-    background-size:cover;
-}
-
-.card-container .card {
-    max-width: 350px;
-    padding: 40px 40px;
-}
-.container h1{
-    text-align:center;
-    color:darkgreen;
-    font:sans-serif;
-}
-.card{
-    height:auto;
-    background-color: #F7F7F7;
-    padding:20px 25px 80px;
-    margin:0 10px;
-    display:block;
-    top:0;
-    border-radius: 2px;
-    box-shadow: 2px 2px gray;
-}
-.profile-img-card{
-    width:100px;
-    height:100px;
-    border-radius:50px;
-    margin: 0 auto 10px;
-    display: block;
-
-}
-.form-signin input[type=email],
-.form-signin input[type=password],
-.form-signin input[type=text],
-.form-signin button {
-    width: 100%;
-    display: block;
-    margin-bottom: 10px;
-    z-index: 1;
-    position: relative;
-/*
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-*/
-    box-sizing: border-box;
-}
-.btn{
-    background-color: rgb(104, 145, 162);
-    padding: 0px;
-    font-weight: 700;
-    font-size: 14px;
-    height: 36px;
-    border-radius: 3px;
-    border: none;
-    color:white;
-}
-.btn:hover, .btn:focus, .btn:active{
-    color:white;
-    background-color: rgb(12, 97, 33);
-}
-.forget-password {
-    color: rgb(104, 145, 162);
-}
-
-.forget-password:hover,
-.forget-password:active,
-.forget-password:focus{
-    color: rgb(12, 97, 33);
-}
-.back-to-login {
-    color: rgb(104, 145, 162);
-}
-
-.back-to-login:hover,back-to-login
-.back-to-login:active,
-.back-to-login:focus{
-    color: rgb(12, 97, 33);
-}
-@media only screen and (min-width:450px){
-    .card{
-        height:70%;
-        width:100%;
-        display:table;
-        margin:0 auto;
-        max-width:350px;
-    }
-}
-
-
-</style>
-
-</head>
-<body>
-        <div class="container">
-        <div class="card card-container">
-            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-            <img id="profile-img" class="profile-img-card" src="avatar_2x.png" />
-            <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin" method="POST" action="/login">
-                <span id="reauth-email" class="reauth-email"></span>
-                <input type="text" id="inputEmail" class="form-control" placeholder="Email address" name="username" required autofocus>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
-<!--
-                <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div>
--->
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
-            </form><!-- /form -->
-            <a href="/register" class="back-to-login">
-                SignUp
-            </a>
-        </div><!-- /card-container -->
-    </div><!-- /container -->
-
-</body>
-</html>
+{% block body %}
+  <div class="container" style="background: #DCEDC8; padding-top: 15px; padding-bottom: 15px; max-width: 500px;">
+    <form method="post" action="/login">
+      <h2>Login</h2>
+    <div class="form-group">
+      <label for="Email">Email address</label>
+      <input type="text" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter your clg id number" name="username">
+    </div>
+    <div class="form-group">
+      <label for="Password">Password</label>
+      <input type="password" class="form-control" id="Password" placeholder="Password" name="password">
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+{% endblock %}

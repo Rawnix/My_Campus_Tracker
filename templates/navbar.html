@@ -39,8 +39,6 @@ li a:hover:not(.active) {
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"/>
 
-{% block s %} {% endblock %}
-
 </head>
 <body>
 <div style="background:#222;color:white;text-align:center;margin:0px;"><h3>My Campus Tracker!</h3></div>
@@ -48,9 +46,13 @@ li a:hover:not(.active) {
   <li><a href="/">Home</a></li>
   <li><a href="/buy">buy</a></li>
   <li><a href="/sell">sell</a></li>
-  <li style="float:right"><a href="/login">login</a></li>
+  {% if session.logged_in %}
   <li style="float:right"><a href="/logout">logout</a></li>
+  <li style="float:right"><a href="/my_sale">my sale</a></li>
+  {% else %}
   <li style="float:right"><a href="/register">register</a></li>
+  <li style="float:right"><a href="/login">login</a></li>
+  {% endif %}
 </ul>
 
 {% block body %}

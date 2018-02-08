@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <title>Document</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block title %}Sale{% endblock %}
+{% block body %}
+<div class="container" style="background: #DCEDC8; padding-top: 15px; padding-bottom: 15px; max-width: 500px;">
   <h1>Your Sale</h1>
   <table class="table table-striped">
     <tbody>
@@ -29,5 +23,5 @@
       {% endfor %}
     </tbody>
   </table>
-</body>
-</html>
+</div>
+{% endblock %}
