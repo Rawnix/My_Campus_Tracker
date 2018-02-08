@@ -50,8 +50,19 @@ def index():
     # else:
     return render_template('home.html', result=result, colors=colors)
 
+# Check if user logged in
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            return redirect('/login')
+    return wrap
+
 # common route for toggling any status
 @app.route('/toggle/<string:b>', methods=['GET', 'POST'])
+@is_logged_in
 def toggle(b):
     if request.method == 'POST' and session['logged_in']:
         cur = mysql.connection.cursor()
@@ -171,6 +182,7 @@ def buy():
             return render_template("Sorry, no results found.")
 
 @app.route('/sell', methods=['GET', 'POST'])
+@is_logged_in
 def sell():
     if request.method == 'GET':
         return render_template('sell.html')
@@ -192,6 +204,7 @@ def sell():
         return redirect('/my_sale')
 
 @app.route('/my_sale')
+@is_logged_in
 def my_sale():
     # redirect to login page if not already logged in
     if session['clg_id'] == '':
@@ -208,6 +221,7 @@ def my_sale():
             return render_template("You have not put any book up for sale.")
 
 @app.route('/logout')
+@is_logged_in
 def logout():
     # session['logged_in'] = False
     # session['clg_id'] = ''
